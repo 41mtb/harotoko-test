@@ -106,7 +106,8 @@ return [
     |
     */
 
-    'faker_locale' => 'en_US',
+    // 'faker_locale' => 'en_US',
+    'faker_locale' => 'ja_JP',
 
     /*
     |--------------------------------------------------------------------------
@@ -227,6 +228,17 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
+        // Model
+        'UserModel' => 'App\Facades\Models\User',
+        'OrderModel' => 'App\Facades\Models\Order',
+        'ShopModel' => 'App\Facades\Models\Shop',
+        'TicketModel' => 'App\Facades\Models\Ticket',
+
+        // Service
+        'UserService' => 'App\Facades\Services\User',
+        'OrderService' => 'App\Facades\Services\Order',
+        'ShopService' => 'App\Facades\Services\Shop',
+        'TicketService' => 'App\Facades\Services\Ticket',
     ],
 
 ];
