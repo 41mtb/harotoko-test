@@ -1,0 +1,207 @@
+
+body {
+  font-family: 'Open Sans', arial, sans-serif;
+  color: #494d55;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+::placeholder {
+  font-size: 0.8em;
+}
+.row{
+  margin-right: auto;
+  margin-left: auto;
+ }
+  /* ホーム、検索画面の画像 */
+ .card-img-top{
+  height:18rem;
+}
+.custom-file {
+  max-width: 20rem;
+  overflow: hidden;
+}
+.custom-file-label {
+  white-space: nowrap;
+}
+.img-thumbnail{
+  height:14rem;
+}
+/* 大デバイス（デスクトップ, 1200px 未満） */
+@media (min-width: 992px) {
+  .title1 {
+    font-size: 3.0rem;
+  }
+ .title2 {
+    font-size: 2.0rem;
+  }
+  /* ホーム、検索画面の画像 */
+  .card-img-top{
+    height:12rem;
+  }
+  /* 登録画面の画像 */
+  #img1{
+    height:8rem;
+  }  
+  #img2,#img3{
+    height:8rem;
+  }
+  /* 詳細画面の画像 */
+  .carousel-item{
+    background-color: lightgrey;
+    height:400px;
+  }
+  .carousel img {
+    display:block;
+    max-width:895px;
+    max-height:400px;
+    position:absolute;
+    height:auto;
+    width: auto;
+    top:0;
+    bottom:0;
+    right:0;
+    left:0;
+    margin:auto;
+  }
+}
+/* 中デバイス（タブレット, 992px 未満） */
+@media (max-width: 991.98px) {
+ .title1 {
+   font-size: 3.0rem;
+ }
+ .title2 {
+  font-size: 2.0rem;
+  }
+  /* ホーム、検索画面の画像 */
+  .card-img-top{
+    height:12rem;
+  }
+  /* 登録画面の画像 */
+  #img1{
+    height:14rem;
+  }  
+  #img2,#img3{
+    height:12rem;
+  }
+  /* 詳細画面の画像 */
+  .carousel-item{
+    background-color: lightgrey;
+    height:400px;
+  }
+  .carousel img {
+    display:block;
+    max-width:895px;
+    max-height:400px;
+    position:absolute;
+    height:auto;
+    width: auto;
+    top:0;
+    bottom:0;
+    right:0;
+    left:0;
+    margin:auto;
+  }
+}
+/* 小デバイス（横向きモバイル, 768px 未満） */
+@media (max-width: 767.98px) {
+ .title1 {
+   font-size: 2.0rem;
+ }
+ .title2 {
+  font-size: 1.0rem;
+  }
+  .listgoup{
+    margin-right: 1.0rem;
+    margin-left: 1.0rem;
+  }
+  /* ホーム、検索画面の画像 */
+  .card-img-top{
+    height:14rem;
+  }
+  /* 登録画面の画像 */
+  #img1{
+    height:8rem;
+  }  
+  #img2,#img3{
+    height:8rem;
+  }
+  /* 詳細画面の画像 */
+  .carousel-item{
+    background-color: lightgrey;
+    height:200px;
+  }
+  .carousel img {
+    display:block;
+    max-width:495px;
+    max-height:200px;
+    position:absolute;
+    height:auto;
+    width: auto;
+    top:0;
+    bottom:0;
+    right:0;
+    left:0;
+    margin:auto;
+  }
+}
+/* @include media-breakpoint-up(sm) { */
+/* 極小デバイス（縦向きモバイル, 576px 未満） */
+@media (max-width: 575.98px) {
+ .title1 {
+   font-size: 1.0rem;
+ }
+ .title2 {
+  font-size: 1.0rem;
+  }
+ .container {
+  padding-right: 0px;
+  padding-left: 0px;
+  }
+  /* ホーム、検索画面の画像 */
+  .card-img-top{
+    height:14rem;
+  }
+  .station{
+    height: 8rem;
+  }
+  p{
+    font-size:1rem;
+  }
+  /* 登録画面の画像 */
+  #img1{
+    height:8rem;
+  }  
+  #img2,#img3{
+    height:8rem;
+  }
+  /* 詳細画面の画像 */
+  .carousel-item{
+    background-color: lightgrey;
+    height:200px;
+  }
+  .carousel img {
+    display:block;
+    max-width:495px;
+    max-height:200px;
+    position:absolute;
+    height:auto;
+    width: auto;
+    top:0;
+    bottom:0;
+    right:0;
+    left:0;
+    margin:auto;
+  }
+}
+
+img.logo{
+  height: 50px;
+  width:  100px;
+}
+
+.jumbotron {
+  background-image: url("../images/global/harotoko.png");
+  background-size: cover;
+  background-position: center 60%;
+}
