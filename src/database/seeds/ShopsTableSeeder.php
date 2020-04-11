@@ -29,6 +29,7 @@ class ShopsTableSeeder extends Seeder
                 'email' => $faker->email,
                 'shop_category' => Arr::random(['カフェ','居酒屋','カレー屋']),
                 'description' => Arr::random(['本格派のスパイスカレー','日本酒に力を入れてます','日本一のバリスタが腕を振るいます']),
+                'feature' => Arr::random(['本格派のスパイスカレー','日本酒に力を入れてます','日本一のバリスタが腕を振るいます']),
             ]);
         }
     }

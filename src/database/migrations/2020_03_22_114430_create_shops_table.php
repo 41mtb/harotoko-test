@@ -19,7 +19,7 @@ class CreateShopsTable extends Migration
             $table->string('shop_name')->nullable()->comment('店舗名');
             $table->string('shop_category')->nullable()->comment('店舗ジャンル');
             $table->string('url')->nullable()->comment('店舗URL');
-            $table->integer('postcode')->nullable()->comment('郵便番号');
+            $table->string('postcode')->nullable()->comment('郵便番号');
             $table->string('prefecture')->nullable()->comment('住所（県）');
             $table->string('city')->nullable()->comment('住所（市町村）');
             $table->string('block')->nullable()->comment('住所（番地、部屋番号）');
@@ -28,6 +28,7 @@ class CreateShopsTable extends Migration
             $table->string('phone')->nullable()->comment('電話番号');
             $table->string('email', 255)->nullable()->comment('連絡先メールアドレス');
             $table->text('description')->nullable()->comment('店舗紹介文');
+            $table->string('feature')->nullable()->comment('店舗の特徴');
             $table->softDeletes();
             $table->timestamps();
             // $table->string('key', 32)->unique();

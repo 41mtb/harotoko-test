@@ -21,6 +21,7 @@ class TicketsTableSeeder extends Seeder
                 'price' => Arr::random(['1000','2000','3000']),
                 'description' => Arr::random(['+100円の大盛りを無料にします。','１０回の値段で１１回使用可能です','人気のデザートを無料でサービスします！']),
                 'remaing' => Arr::random([1,11]),
+                'type' => Arr::random(['単品','割引','まとめ']),
             ]);
         }
     }

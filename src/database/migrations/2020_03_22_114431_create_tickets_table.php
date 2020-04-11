@@ -20,6 +20,7 @@ class CreateTicketsTable extends Migration
             $table->integer('price')->nullable()->comment('金額');
             $table->text('description')->nullable()->comment('説明');
             $table->integer('remaing')->default(1)->comment('使用回数');
+            $table->string('type')->comment('チケットタイプ');
             $table->softDeletes();
             $table->timestamps();
             // $table->string('key', 32)->unique();

@@ -19,7 +19,7 @@ class OrdersTableSeeder extends Seeder
                 'user_id' => $i,
                 'ticket_id' => $i,
                 'ordering_price' => Arr::random([1000,2000,3000,4000,5000]),
-                'ordergin_description' => Arr::random(['ドリンクの回数券です','人気メニューとデザート１品サービスします！','10000円分の割引券です。']),
+                'ordering_description' => Arr::random(['ドリンクの回数券です','人気メニューとデザート１品サービスします！','10000円分の割引券です。']),
                 'remaing' => Arr::random([1,11]),
                 'message' =>  Arr::random(['また行きます！','美味しいご飯をいつもありがとう！','次も楽しみしてます！']),
                 // 'key' => $faker->md5(),

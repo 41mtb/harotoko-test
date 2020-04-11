@@ -18,7 +18,7 @@ class CreateOrdersTable extends Migration
             $table->unsignedInteger('user_id')->comment('ユーザーID');
             $table->unsignedInteger('ticket_id')->comment('チケットID');
             $table->integer('ordering_price')->nullable()->comment('注文価格');
-            $table->string('ordergin_description')->nullable()->comment('購入商品の説明');
+            $table->string('ordering_description')->nullable()->comment('購入商品の説明');
             $table->integer('remaing')->default(1)->comment('残数');
             $table->text('message')->nullable()->comment('メッセージ');
             $table->timestamps();

@@ -16,6 +16,7 @@ class UsersTableSeeder extends Seeder
             'email' => $faker->unique()->safeEmail,
             'email_verified_at' => now(),
             'password' => bcrypt('password'),
+            'type' => Arr::random([0,1]),
             ]);
         }
     }
