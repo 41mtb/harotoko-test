@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'Harotoko'),
 
     /*
     |--------------------------------------------------------------------------
@@ -233,12 +233,14 @@ return [
         'OrderModel' => 'App\Facades\Models\Order',
         'ShopModel' => 'App\Facades\Models\Shop',
         'TicketModel' => 'App\Facades\Models\Ticket',
+        'ProfileModel' => 'App\Facades\Models\Profile',
 
         // Service
         'UserService' => 'App\Facades\Services\User',
         'OrderService' => 'App\Facades\Services\Order',
         'ShopService' => 'App\Facades\Services\Shop',
         'TicketService' => 'App\Facades\Services\Ticket',
+        'ProfileService' => 'App\Facades\Services\Profile',
     ],
 
 ];

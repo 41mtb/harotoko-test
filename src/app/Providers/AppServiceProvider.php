@@ -36,6 +36,10 @@ class AppServiceProvider extends ServiceProvider
         return app('App\Models\Ticket');
         });
 
+        $this->app->bind('profileModel', function(){
+        return app('App\Models\Profile');
+        });
+
 
         /*
         |
@@ -58,6 +62,9 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->bind('ticketService', function(){
         return app('App\Services\Ticket');
+        });
+        $this->app->bind('profileService', function(){
+        return app('App\Services\Profile');
         });
         
     }

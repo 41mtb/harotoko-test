@@ -20,3 +20,14 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::resource('shop', 'ShopController');
+    Route::resource('ticket', 'TicketController');
+    Route::resource('order', 'OrderController');
+    Route::resource('profile', 'ProfileController');
+    Route::get('mypage', 'MypageController@index')->name('mypage');
+    Route::get('mypage/shop', 'MypageController@shop')->name('mypage.shop');
+    Route::get('mypage/order', 'MypageController@order')->name('mypage.order');
+    Route::get('mypage/supporter', 'MypageController@supporter')->name('mypage.supporter');
+});
