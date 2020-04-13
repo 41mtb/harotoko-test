@@ -17,6 +17,7 @@ class CreateTicketImagesTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('ticket_id')->comment('スペースID');
             $table->string('path')->comment('画像パス');
+            $table->text('real_path')->nullable()->comment('画像URL');
             $table->timestamps();
             // $table->string('key', 32)->unique();
 

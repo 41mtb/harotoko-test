@@ -18,7 +18,7 @@ class CreateShopsTable extends Migration
             $table->unsignedInteger('user_id')->comment('ユーザーID');
             $table->string('shop_name')->nullable()->comment('店舗名');
             $table->string('shop_category')->nullable()->comment('店舗ジャンル');
-            $table->string('url')->nullable()->comment('店舗URL');
+            $table->text('url')->nullable()->comment('店舗URL');
             $table->string('postcode')->nullable()->comment('郵便番号');
             $table->string('prefecture')->nullable()->comment('住所（県）');
             $table->string('city')->nullable()->comment('住所（市町村）');
