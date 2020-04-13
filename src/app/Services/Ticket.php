@@ -11,47 +11,60 @@ class Ticket
   // singup時
   public function create($request)
   {
-    $spaceInputs = $request['space'];
-    $spaceInputs['key']= $this->createKey();
-    $space = SpaceModel::create($spaceInputs);
-    $spaceFormInputs = $request['spaceForms'];
-    foreach($spaceFormInputs as $spaceFormInput){
-      $spaceFormInput['key']= $this->createKey();
-      $space->spaceForms()->create($spaceFormInput);
+    $ticketInputs = $request->except(['files','_token']);
+    //0は単品、1は割引、2以上はまとめと回数
+    if($ticketInputs['type'] == 0 ){
+      $ticketInputs['type'] ='単品';
+      $ticketInputs['remaing'] = 1 ;
+    }elseif($ticketInputs['type'] == 1 ){
+      $ticketInputs['type'] ='割引' ;
+      $ticketInputs['remaing'] = 1 ;
+    }else{
+      $ticketInputs['remaing'] = $ticketInputs['type'];
+      $ticketInputs['type'] ='まとめ';
     }
+    $ticket = TicketModel::create($ticketInputs);
     if($request->file('files')){
-      $spaceImages = $request->file('files');
-      foreach ($spaceImages as $key => $spaceImage) {
-        $path = Storage::disk('s3')->putFileAs('spaces', $spaceImage, $space['id'].'-'.$key.'.jpg', 'public');
-        $space->spaceImages()->create((['path' => $path]));
+      $ticketImages = $request->file('files');
+      foreach ($ticketImages as $key => $ticketImage) {
+        $path = Storage::disk('s3')->putFileAs('shops', $ticketImage, $ticket['id'].'-'.$key.'.jpg', 'public');
+        $realPath = Storage::disk('s3')->url($path);
+        $ticket->ticketImages()->create(['path' => $path,'real_path' => $realPath]);
       }
     };
-    return $space;
+    return $ticket;
   }
 
-  public function update($request,$key)
+  public function update($request,$id)
   {
     try {
-      $space = SpaceModel::where('key', $key)->first();
-      $space->fill($request['space'])->save();
-      $spaceFormInputs = $request['spaceForms'];
-      $space->spaceForms()->delete();
-      foreach($spaceFormInputs as $spaceFormInput){
-        $spaceFormInput['key']= $this->createKey();
-        $space->spaceForms()->create($spaceFormInput);
+      $ticket = TicketModel::where('id', $id)->first();
+      $ticketInputs = $request->except(['files','_token']);
+      //0は単品、1は割引、2以上はまとめと回数
+      if($ticketInputs['type'] == 0 ){
+        $ticketInputs['type'] ='単品';
+        $ticketInputs['remaing'] = 1 ;
+      }elseif($ticketInputs['type'] == 1 ){
+        $ticketInputs['type'] ='割引' ;
+        $ticketInputs['remaing'] = 1 ;
+      }else{
+        $ticketInputs['remaing'] = $ticketInputs['type'];
+        $ticketInputs['type'] ='まとめ';
       }
+      $ticket->fill($ticketInputs)->update();
       if($request->file('files')){
-        $spaceImagePaths = $space->spaceImages;
-        foreach ($spaceImagePaths as $key => $spaceImagePath) {
+        $ticketImages = $request->file('files');
+        $ticketImagePaths = $ticket->ticketImages;
+        foreach ($ticketImagePaths as $key => $ticketImagePath) {
           //S3の画像とDBのパスを削除
-          Storage::disk('s3')->delete($spaceImagePath['path']);
+          Storage::disk('s3')->delete($ticketImagePath['path']);
+          $ticket->ticketImages()->delete();
         }
-        $space->spaceImages()->delete();
-        $requestImages = $request->file('files');
-        foreach ($requestImages as $key => $requestImage) {
+        foreach ($ticketImages as $key => $ticketImage) {
           //S3の画像とDBのパスを追加
-          $path = Storage::disk('s3')->putFileAs('spaces', $requestImage, $space['id'].'-'.$key.'.jpg', 'public');
-          $space->spaceImages()->create((['path' => $path]));
+          $path = Storage::disk('s3')->putFileAs('shops', $ticketImage, $ticket['id'].'-'.$key.'.jpg', 'public');
+          $realPath = Storage::disk('s3')->url($path);
+          $ticket->ticketImages()->create(['path' => $path,'real_path' => $realPath]);
         }
       };
     } catch (ModelNotFoundException $e) {
@@ -62,7 +75,7 @@ class Ticket
       throw new \Exception('ShopModel を削除できなかった');
     }
 
-    return $space;
+    return $ticket;
   }
   
   public function delete(string $key)

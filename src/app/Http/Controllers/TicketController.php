@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\{JsonResponse, Request, Response};
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 
 // Model
@@ -22,9 +22,24 @@ class TicketController extends Controller
      */
     public function index()
     {
-        //
+        $tickets = TicketModel::paginate(12);
+        return view('ticket.index',compact('tickets'));
     }
-
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        $user = Auth::user();
+        //サポーターはhome、ホストは店舗登録
+        if($user->type == 0){
+            return view('/home');
+        }else{
+            return view('ticket/create',compact('user'));
+        };
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -34,12 +49,12 @@ class TicketController extends Controller
     public function store(Request $request)
     {
         try {
-            $space = SpaceService::create($request);
+            $ticket = TicketService::create($request);
         }
         catch (\Exception $e) {
-            return ApiResponseBuilder::serverError();
+            return $e->getMessage();
         }
-        return ApiResponseBuilder::createResponse(SpaceResponseBuilder::formatData($space));
+        return redirect('mypage');
     }
 
     /**
@@ -48,18 +63,39 @@ class TicketController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(string $key)
+    public function show(string $id)
     {
         try {
-            $space = SpaceModel::where('key', $key)->firstOrFail();
-          }
-          catch (ModelNotFoundException $error) {
-            return ApiResponseBuilder::unauthorized();
-          }
-          catch (\Exception $e) {
-            return ApiResponseBuilder::serverError();
-          }
-          return ApiResponseBuilder::createResponse(SpaceResponseBuilder::formatData($space));
+            $ticket = TicketModel::where('id', $id)->firstOrFail();
+            $shop = $ticket->shop;
+        }
+        catch (ModelNotFoundException $error) {
+            return $error->getMessage();
+        }
+        catch (\Exception $e) {
+            return $e->getMessage();
+        }
+        return view('ticket.show',compact(['ticket','shop']));
+    }
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        try {
+            $ticket = TicketModel::where('id', $id)->firstOrFail();
+            $user = Auth::user();
+        }
+        catch (ModelNotFoundException $error) {
+            return $error->getMessage();
+        }
+        catch (\Exception $e) {
+            return $e->getMessage();
+        };
+        return view('ticket.edit',compact(['user','ticket']));
     }
 
     /**
