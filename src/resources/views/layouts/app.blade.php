@@ -73,9 +73,56 @@
             </div>
         </nav>
 
-        <main class="py-4  col-md-8 offset-md-2 ">
+        <main class="py-4  col-md-8 offset-md-2 mb-5">
             @yield('content')
         </main>
     </div>
+        <!-- Footer -->
+        <footer>
+            <div class="container col-md-8 offset-md-2 ">
+                <div class="row">
+                    <div class="col-md-3 footer-contact wow fadeInDown">
+                        <h3>Company</h3>
+                        <p>株式会社Daft</p>
+                    </div>
+                    <div class="col-md-4 offset-md-1 footer-contact wow fadeInDown">
+                        <h3>Contact</h3>
+                        <p>神戸市垂水区本多聞3丁目11-11</p>
+                        <p>Phone: (078) 600 2283</p>
+                        <p>Email: <a href="mailto:info@info@tellad.jp">info@tellad.jp</a></p>
+                    </div>
+                    <div class="col-md-4 footer-links wow fadeInUp">
+                        <div class="row">
+                            <div class="col">
+                                <h3>Links</h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p class="m-1"><a href="/news">お知らせ</a></p>
+                                <p class="m-1"><a href="/company">会社概要</a></p>
+                                <p class="small m-1"><a href="/privacy">プライバシーポリシー</a></p>
+                                <p class="m-1"><a href="https://form.run/@tellad-contact">お問い合わせ</a></p>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="m-1"><a href="/terms">利用規約</a></p>
+                                <p class="m-1"><a href="/usage">利用方法</a></p>
+                                <p class="m-1"><a href="/faq">よくある質問</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 footer-copyright">
+                            &copy; 2020 Tellad 運営 株式会社 Daft</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
