@@ -55,6 +55,23 @@
                 </div>
             </div>
             <div class='row'>
+                <div class="form-group col-md-6 row">
+                    <label class="col-md-6" for="exampleFormControlSelect1">ジャンル</label>
+                    <select name='shop_category' class="col-md-6 form-control form-control-sm" id="exampleFormControlSelect1">
+                        @foreach($shopCategories as $shopCategory)
+                            @if($shop->shop_category == $shopCategory)
+                                <option  selected value={{$shopCategory}}>{{$shopCategory}}</option>
+                            @else
+                                <option value={{$shopCategory}}>{{$shopCategory}}</option>
+                            @endif
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <input id="address" type="text" placeholder="店舗キャッチコピー"  class="form-control fform-control-sm" name = "feature" value="{{ $shop->feature }}">
+                </div>
+            </div>
+            <div class='row'>
                 <div class="form-group col-md-6">
                     <input placeholder='店舗HP' type="text" class="form-control fform-control-sm" name = "url" value="{{ $shop->url}}">
                 </div>
@@ -85,23 +102,6 @@
                 </div>
                 <div class="form-group col-md-6">
                     <input type="text" placeholder="住所（番地）"  class="form-control fform-control-sm" name = "block" value="{{ $shop->block }}">
-                </div>
-            </div>
-            <div class='row'>
-                <div class="form-group col-md-6 row">
-                    <label class="col-md-6" for="exampleFormControlSelect1">ジャンル</label>
-                    <select name='shop_category' class="col-md-6 form-control form-control-sm" id="exampleFormControlSelect1">
-                        @foreach($shopCategories as $shopCategory)
-                            @if($shop->shop_category == $shopCategory)
-                                <option  selected value={{$shopCategory}}>{{$shopCategory}}</option>
-                            @else
-                                <option value={{$shopCategory}}>{{$shopCategory}}</option>
-                            @endif
-                        @endforeach
-                    </select>
-                </div>
-                <div class="form-group col-md-6">
-                    <input id="address" type="text" placeholder="店舗キャッチコピー"  class="form-control fform-control-sm" name = "feature" value="{{ $shop->feature }}">
                 </div>
             </div>
             <div class='row'>

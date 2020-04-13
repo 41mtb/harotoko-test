@@ -13,7 +13,7 @@
                             <img class="card-img-top"  src="{{$shop->shopImages[0]->real_path}}?<?= uniqid() ?>">
                             <div class="card-body text-dark">
                                 <h6 class="card-title ">{{$shop->shop_name}}</span></h6>
-                                <p class="h5 card-text text-right text-danger font-weight-bold">{{$shop->description}}</p>
+                                <p class="card-text">{{mb_substr($shop->description,0,24)}}</p>
                             </div>
                         </a>
                     </div>

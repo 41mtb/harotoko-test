@@ -39,7 +39,7 @@ class ShopController extends Controller
         $shopCategories = array('カレー屋','カフェ','居酒屋');
         //サポーターはhome、ホストは店舗登録
         if($user->type == 0){
-            return redirect('/home');
+            return redirect('shop');
         }else{
             return view('shop/create',compact(['user','shopCategories']));
         };

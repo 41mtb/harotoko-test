@@ -35,7 +35,7 @@ class TicketController extends Controller
         $user = Auth::user();
         //サポーターはhome、ホストは店舗登録
         if($user->type == 0){
-            return view('/home');
+            return view('/shop');
         }else{
             return view('ticket/create',compact('user'));
         };

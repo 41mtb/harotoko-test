@@ -22,7 +22,7 @@
         @csrf
         <div class="mx-auto">
              <div class="form-group row">
-                <div class="col-md-8">
+                <div class="col-md-8 offset-md-2">
                     <label for="file">店舗の画像（複数枚可・最大３枚）</label>
                     <div id="file" class="input-group 2">
                         <div class="custom-file">
@@ -42,6 +42,19 @@
                 </div>
                 <div class="form-group col-md-6">
                     <input type="text" class="form-control fform-control-sm" placeholder="代表者名" name = "name" value="{{ old('name') }}">
+                </div>
+            </div>
+            <div class='row'>
+                <div class="form-group col-md-6 row">
+                    <label class="col-md-6" for="exampleFormControlSelect1">ジャンル</label>
+                    <select name='shop_category' class="col-md-6 form-control form-control-sm" id="exampleFormControlSelect1">
+                    @foreach($shopCategories as $shopCategory)
+                        <option value={{$shopCategory}}>{{$shopCategory}}</option>
+                    @endforeach
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <input id="address" type="text" placeholder="店舗キャッチコピー"  class="form-control fform-control-sm" name = "feature" value="{{ old('feature') }}">
                 </div>
             </div>
             <div class='row'>
@@ -75,19 +88,6 @@
                 </div>
                 <div class="form-group col-md-6">
                     <input type="text" placeholder="住所（番地）"  class="form-control fform-control-sm" name = "block" value="{{ old('block') }}">
-                </div>
-            </div>
-            <div class='row'>
-                <div class="form-group col-md-6 row">
-                    <label class="col-md-6" for="exampleFormControlSelect1">ジャンル</label>
-                    <select name='shop_category' class="col-md-6 form-control form-control-sm" id="exampleFormControlSelect1">
-                    @foreach($shopCategories as $shopCategory)
-                        <option value={{$shopCategory}}>{{$shopCategory}}</option>
-                    @endforeach
-                    </select>
-                </div>
-                <div class="form-group col-md-6">
-                    <input id="address" type="text" placeholder="店舗キャッチコピー"  class="form-control fform-control-sm" name = "feature" value="{{ old('feature') }}">
                 </div>
             </div>
             <div class='row'>
