@@ -15,7 +15,7 @@ body {
  }
   /* ホーム、検索画面の画像 */
  .card-img-top{
-  height:18rem;
+  height:8rem;
 }
 .custom-file {
   max-width: 20rem;
@@ -37,7 +37,7 @@ body {
   }
   /* ホーム、検索画面の画像 */
   .card-img-top{
-    height:12rem;
+    height:8rem;
   }
   /* 登録画面の画像 */
   #img1{
@@ -75,7 +75,7 @@ body {
   }
   /* ホーム、検索画面の画像 */
   .card-img-top{
-    height:12rem;
+    height:8rem;
   }
   /* 登録画面の画像 */
   #img1{

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\{JsonResponse, Request, Response};
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 
 // Model
@@ -23,11 +23,27 @@ class ShopController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index()
     {
-        //
+        $shops = ShopModel::paginate(12);
+        return view('shop.index',compact('shops'));
     }
-
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        $user = Auth::user();
+        $shopCategories = array('カレー屋','カフェ','居酒屋');
+        //サポーターはhome、ホストは店舗登録
+        if($user->type == 0){
+            return redirect('/home');
+        }else{
+            return view('shop/create',compact(['user','shopCategories']));
+        };
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -40,9 +56,9 @@ class ShopController extends Controller
             $shop = ShopService::create($request);
         }
         catch (\Exception $e) {
-            return ApiResponseBuilder::serverError();
+            return $e->getMessage();
         }
-        return ApiResponseBuilder::createResponse(ShopResponseBuilder::formatData($shop));
+        return redirect('ticket/create');
     }
 
     /**
@@ -51,20 +67,40 @@ class ShopController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(string $key)
+    public function show(string $id)
     {
         try {
-            $shop = ShopModel::where('key', $key)->firstOrFail();
+            $shop = ShopModel::where('id', $id)->firstOrFail();
         }
         catch (ModelNotFoundException $error) {
-            return ApiResponseBuilder::unauthorized();
+            return $error->getMessage();
         }
         catch (\Exception $e) {
-            return ApiResponseBuilder::serverError();
+            return $e->getMessage();
         }
-        return ApiResponseBuilder::createResponse(ShopResponseBuilder::formatData($shop));
+        return view('shop.show',compact('shop'));
     }
-
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        try {
+            $shop = ShopModel::where('id', $id)->firstOrFail();
+            $user = Auth::user();
+            $shopCategories = array('カレー屋','カフェ','居酒屋');
+        }
+        catch (ModelNotFoundException $error) {
+            return $error->getMessage();
+        }
+        catch (\Exception $e) {
+            return $e->getMessage();
+        }
+        return view('shop.edit',compact(['user','shop','shopCategories']));
+    }
     /**
      * Update the specified resource in storage.
      *
@@ -72,17 +108,17 @@ class ShopController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$key)
+    public function update(Request $request,$id)
     {
         try {
-            $shop = ShopModel::where('key', $key)->firstOrFail();
-            $shop = ShopService::update($request,$key);
+            $shop = ShopModel::where('id', $id)->firstOrFail();
+            $shop = ShopService::update($request,$id);
         }
         catch (ModelNotFoundException $error) {
-            return ApiResponseBuilder::modelNotFound('shop', $key);
+            return $error->getMessage();
         }
 
-        return ApiResponseBuilder::createResponse(ShopResponseBuilder::formatData($shop));
+        return view('shop.show',compact('shop'));
     }
 
     /**

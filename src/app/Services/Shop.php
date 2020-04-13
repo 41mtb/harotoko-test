@@ -14,29 +14,25 @@ class Shop
 
   public function create($request)
   {
-    $shopInputs = $request['shop'];
-    $shopInputs['key']= $this->createKey();
-    $shopInputs['user_id'] = auth()->id();
+    $shopInputs = $request->except(['files','_token']);
     $shop = ShopModel::create($shopInputs);
-    $shop->shopFeatures()->attach($request['shop_feature_id']);
-    $shop->customerFeatures()->attach($request['customer_feature_id']);
     if($request->file('files')){
       $shopImages = $request->file('files');
       foreach ($shopImages as $key => $shopImage) {
         $path = Storage::disk('s3')->putFileAs('shops', $shopImage, $shop['id'].'-'.$key.'.jpg', 'public');
-        $shop->shopImages()->create((['path' => $path]));
+        $realPath = Storage::disk('s3')->url($path);
+        $shop->shopImages()->create((['path' => $path,'real_path' => $realPath]));
       }
     };
     return $shop;
   }
 
-  public function update($request,$key)
+  public function update($request,$id)
   {
     try {
-      $shop = ShopModel::where('key', $key)->first();
-      $shop->fill($request['shop'])->save();
-      $shop->shopFeatures()->sync($request['shop_feature_id']);
-      $shop->customerFeatures()->sync($request['customer_feature_id']);
+      $shop = ShopModel::where('id', $id)->first();
+      $shopInputs = $request->except(['files','_token']);
+      $shop->fill($shopInputs)->update();
       if($request->file('files')){
         $shopImages = $request->file('files');
         $shopImagePaths = $shop->shopImages;
@@ -48,7 +44,8 @@ class Shop
         foreach ($shopImages as $key => $shopImage) {
           //S3の画像とDBのパスを追加
           $path = Storage::disk('s3')->putFileAs('shops', $shopImage, $shop['id'].'-'.$key.'.jpg', 'public');
-          $shop->shopImages()->create((['path' => $path]));
+          $realPath = Storage::disk('s3')->url($path);
+          $shop->shopImages()->create(['path' => $path,'real_path' => $realPath]);
         }
       };
     } catch (ModelNotFoundException $e) {
