@@ -125,7 +125,8 @@
         </div>
     </footer>
     @if(request()->path()==='user/payment/form')
-        @include('item.payment');
+        <script src="https://js.stripe.com/v3/"></script>
+        <script src="js/payment.js"></script>
     @endif
 </body>
 </html>
