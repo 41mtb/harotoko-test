@@ -124,5 +124,8 @@
             </div>
         </div>
     </footer>
+    @if(request()->path()==='user/payment/form')
+        @include('item.payment');
+    @endif
 </body>
 </html>

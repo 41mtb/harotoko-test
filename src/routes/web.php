@@ -20,6 +20,11 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+// Stripe関連
+Route::get('/user/payment', 'PaymentController@getCurrentPayment')->name('user.payment');
+Route::get('/user/payment/form', 'PaymentController@getPaymentForm')->name('user.payment.form');
+Route::post('/user/payment/store', 'PaymentController@storePaymentInfo')->name('user.payment.store');
+Route::post('/user/payment/destroy', 'PaymentController@deletePaymentInfo')->name('user.payment.destroy');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('shop', 'ShopController');
